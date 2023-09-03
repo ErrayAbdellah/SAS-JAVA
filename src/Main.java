@@ -1,5 +1,3 @@
-import dao.DbConnection;
-
 import java.sql.Connection;
 
 public class Main {
