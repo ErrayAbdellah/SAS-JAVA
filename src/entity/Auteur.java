@@ -1,50 +1,36 @@
 package entity;
 
 import java.sql.Date;
+import java.util.List;
 
-public class Auteur {
-    private int id ;
-    private String full_name ;
-    private String nationalite ;
-    private Date date_naissance ;
+public class Auteur extends Persone {
 
-    public int getId() {
-        return id;
+    private List<Livre> livres ;
+
+    public Auteur() {
+        super();
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public Auteur(String name, String lastName, String nationalite, Date date_naissance) {
+        super(name, lastName, nationalite, date_naissance);
+
     }
 
-    public String getFull_name() {
-        return full_name;
+    public List<Livre> getLivres() {
+        return livres;
     }
 
-    public void setFull_name(String full_name) {
-        this.full_name = full_name;
-    }
-
-    public String getNationalite() {
-        return nationalite;
-    }
-
-    public void setNationalite(String nationalite) {
-        this.nationalite = nationalite;
-    }
-
-    public Date getDate_naissance() {
-        return date_naissance;
-    }
-
-    public void setDate_naissance(Date date_naissance) {
-        this.date_naissance = date_naissance;
+    public void setLivres(List<Livre> livres) {
+        this.livres = livres;
     }
 
     @Override
     public String toString() {
         return "Auteur{" +
-                "id=" + id +
-                ", full_name='" + full_name + '\'' +
+                "livres=" + livres +
+                ", id=" + id +
+                ", name='" + name + '\'' +
+                ", lastName='" + lastName + '\'' +
                 ", nationalite='" + nationalite + '\'' +
                 ", date_naissance=" + date_naissance +
                 '}';

@@ -1,55 +1,40 @@
 package entity;
 
 import java.sql.Date;
+import java.util.List;
 
-public class Emprunteur {
-    private int id;
-    private String name;
-    private String lastName;
-    private boolean deleted;
-    private boolean status;
+public class Emprunteur extends Persone {
+    private boolean is_deleted;
+    private boolean is_dispo;
     private Date date_emprunt;
     private Date dateReturn;
+    private List<Emprunteur> emprunteurs;
 
-
-    public int getId() {
-        return id;
+    public Emprunteur(){
     }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public Emprunteur(String name, String lastName, String nationalite, Date date_naissance, boolean is_deleted, boolean is_dispo, Date date_emprunt, Date dateReturn, List<Emprunteur> emprunteurs) {
+        super(name, lastName, nationalite, date_naissance);
+        this.is_deleted = is_deleted;
+        this.is_dispo = is_dispo;
+        this.date_emprunt = date_emprunt;
+        this.dateReturn = dateReturn;
+        this.emprunteurs = emprunteurs;
     }
 
     public boolean isDeleted() {
-        return deleted;
+        return is_deleted;
     }
 
     public void setDeleted(boolean deleted) {
-        this.deleted = deleted;
+        this.is_deleted = deleted;
     }
 
     public boolean isStatus() {
-        return status;
+        return is_dispo;
     }
 
     public void setStatus(boolean status) {
-        this.status = status;
+        this.is_dispo = status;
     }
 
     public Date getDate_emprunt() {
@@ -68,16 +53,22 @@ public class Emprunteur {
         this.dateReturn = dateReturn;
     }
 
+    public List<Emprunteur> getEmprunteurs() {
+        return emprunteurs;
+    }
+
+    public void setEmprunteurs(List<Emprunteur> emprunteurs) {
+        this.emprunteurs = emprunteurs;
+    }
+
     @Override
     public String toString() {
         return "Emprunteur{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", deleted=" + deleted +
-                ", status=" + status +
+                ", deleted=" + is_deleted +
+                ", status=" + is_dispo +
                 ", date_emprunt=" + date_emprunt +
                 ", dateReturn=" + dateReturn +
+                ", emprunteurs=" + emprunteurs +
                 '}';
     }
 }

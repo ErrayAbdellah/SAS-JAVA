@@ -1,12 +1,17 @@
 package entity;
 
+import java.util.List;
+
 public class Livre {
 
     private int id ;
     private String titre ;
     private String isbn ;
     private long qnt ;
-    private int auteur_id ;
+    private Auteur auteur ;
+
+    private List<Emprunteur> emprunteurs ;
+
 
     public int getId() {
         return id;
@@ -40,12 +45,20 @@ public class Livre {
         this.qnt = qnt;
     }
 
-    public int getAuteur_id() {
-        return auteur_id;
+    public Auteur getAuteur() {
+        return auteur;
     }
 
-    public void setAuteur_id(int auteur_id) {
-        this.auteur_id = auteur_id;
+    public void setAuteur(Auteur auteur) {
+        this.auteur = auteur;
+    }
+
+    public List<Emprunteur> getEmprunteurs() {
+        return emprunteurs;
+    }
+
+    public void setEmprunteurs(List<Emprunteur> emprunteurs) {
+        this.emprunteurs = emprunteurs;
     }
 
     @Override
@@ -55,7 +68,9 @@ public class Livre {
                 ", titre='" + titre + '\'' +
                 ", isbn='" + isbn + '\'' +
                 ", qnt=" + qnt +
-                ", auteur_id=" + auteur_id +
+                ", auteur=" + auteur +
+                ", emprunteurs=" + emprunteurs +
                 '}';
     }
+
 }
