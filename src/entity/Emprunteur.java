@@ -12,8 +12,8 @@ public class Emprunteur extends Persone {
 
     public Emprunteur(){
     }
-    public Emprunteur(String name, String lastName, String nationalite, Date date_naissance, boolean is_deleted, boolean is_dispo, Date date_emprunt, Date dateReturn, List<Emprunteur> emprunteurs) {
-        super(name, lastName, nationalite, date_naissance);
+    public Emprunteur(int id,String name, String lastName, String nationalite, Date date_naissance, boolean is_deleted, boolean is_dispo, Date date_emprunt, Date dateReturn, List<Emprunteur> emprunteurs) {
+        super(id, name, lastName, nationalite, date_naissance);
         this.is_deleted = is_deleted;
         this.is_dispo = is_dispo;
         this.date_emprunt = date_emprunt;

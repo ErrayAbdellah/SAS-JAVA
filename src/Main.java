@@ -1,4 +1,4 @@
-import dao.AuteurDaoImpl;
+import dao.impl.AuteurDaoImpl;
 import dao.DbConnection;
 import entity.Auteur;
 
@@ -26,32 +26,26 @@ public class Main {
 
     public static void main(String[] args) throws ParseException {
 
-
         Connection connection = DbConnection.dbConnection();
 //        if (connection == null) {
 //            System.out.println("error");
 
-//            Scanner scanner = new Scanner(System.in);
+//        Scanner scanner = new Scanner(System.in);
 //
-//            System.out.println("Enter your name: ");
-//            String name = scanner.nextLine();
-//            System.out.println("Enter your Last name: ");
-//            String lastName = scanner.nextLine();
-//            System.out.println("Enter your nationalité: ");
-//            String nationalite = scanner.nextLine();
-//            System.out.println("Enter your birthday ");
-//            String birthday = scanner.nextLine();
-
-
-
-//            Auteur auteur = new Auteur(name, lastName, nationalite, convertDate(birthday));
+//        System.out.println("Enter your ID: ");
+//        int id = Integer.parseInt(scanner.nextLine());
+//        System.out.println("Enter your name: ");
+//        String name = scanner.nextLine();
+//        System.out.println("Enter your Last name: ");
+//        String lastName = scanner.nextLine();
+//        System.out.println("Enter your nationalité: ");
+//        String nationalite = scanner.nextLine();
+//        System.out.println("Enter your birthday ");
+//        String birthday = scanner.nextLine();
+//        Auteur auteur = new Auteur(id,name, lastName, nationalite, convertDate(birthday));
 //
-//
-            AuteurDaoImpl auteurDao = new AuteurDaoImpl();
-//            auteurDao.add(auteur);
-//            System.out.println("nadyyyyyyyyyyya");
-            //System.out.println(auteurDao.findById(8));
-        auteurDao.findAll() ;
+//       AuteurDaoImpl auteurDao = new AuteurDaoImpl();
+//       auteurDao.update(auteur);
 
 
         }

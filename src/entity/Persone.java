@@ -12,7 +12,8 @@ public class Persone {
     public Persone() {
     }
 
-    public Persone( String name, String lastName, String nationalite, Date date_naissance) {
+    public Persone(int id, String name, String lastName, String nationalite, Date date_naissance) {
+        this.id = id;
         this.name = name;
         this.lastName = lastName;
         this.nationalite = nationalite;

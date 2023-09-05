@@ -8,11 +8,10 @@ public class Auteur extends Persone {
     private List<Livre> livres ;
 
     public Auteur() {
-        super();
     }
 
-    public Auteur(String name, String lastName, String nationalite, Date date_naissance) {
-        super(name, lastName, nationalite, date_naissance);
+    public Auteur(int id, String name, String lastName, String nationalite, Date date_naissance) {
+        super(id,name, lastName, nationalite, date_naissance);
 
     }
 
