@@ -8,17 +8,17 @@ public class Emprunteur extends Persone {
     private boolean is_dispo;
     private Date date_emprunt;
     private Date dateReturn;
-    private List<Emprunteur> emprunteurs;
+    private List<Livre> livres;
 
     public Emprunteur(){
     }
-    public Emprunteur(int id,String name, String lastName, String nationalite, Date date_naissance, boolean is_deleted, boolean is_dispo, Date date_emprunt, Date dateReturn, List<Emprunteur> emprunteurs) {
+    public Emprunteur(int id,String name, String lastName, String nationalite, Date date_naissance, boolean is_deleted, boolean is_dispo, Date date_emprunt, Date dateReturn, List<Livre> livres) {
         super(id, name, lastName, nationalite, date_naissance);
         this.is_deleted = is_deleted;
         this.is_dispo = is_dispo;
         this.date_emprunt = date_emprunt;
         this.dateReturn = dateReturn;
-        this.emprunteurs = emprunteurs;
+        this.livres = livres;
     }
 
     public boolean isDeleted() {
@@ -53,12 +53,12 @@ public class Emprunteur extends Persone {
         this.dateReturn = dateReturn;
     }
 
-    public List<Emprunteur> getEmprunteurs() {
-        return emprunteurs;
+    public List<Livre> getEmprunteurs() {
+        return livres;
     }
 
-    public void setEmprunteurs(List<Emprunteur> emprunteurs) {
-        this.emprunteurs = emprunteurs;
+    public void setEmprunteurs(List<Livre> livres) {
+        this.livres = livres;
     }
 
     @Override
@@ -68,7 +68,7 @@ public class Emprunteur extends Persone {
                 ", status=" + is_dispo +
                 ", date_emprunt=" + date_emprunt +
                 ", dateReturn=" + dateReturn +
-                ", emprunteurs=" + emprunteurs +
+                ", emprunteurs=" + livres +
                 '}';
     }
 }

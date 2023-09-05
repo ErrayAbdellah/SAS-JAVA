@@ -12,30 +12,30 @@ create table Auteur
     date_naissance DATE
 );
 CREATE TABLE Livre(
-      id        INT PRIMARY KEY AUTO_INCREMENT ,
-      titre     VARCHAR(255),
-      isbn      VARCHAR(255),
-      qnt       INT(255),
-      auteur_id INT ,
-      FOREIGN KEY (auteur_id) REFERENCES Auteur(id)
+  id        INT PRIMARY KEY AUTO_INCREMENT ,
+  titre     VARCHAR(255),
+  isbn      VARCHAR(255),
+  qnt       INT(255),
+  auteur_id INT ,
+  FOREIGN KEY (auteur_id) REFERENCES Auteur(id)
 );
 CREATE TABLE Emprunteur(
-       id           INT PRIMARY KEY AUTO_INCREMENT ,
-       name         VARCHAR(255),
-       lastName     VARCHAR(255),
-       is_deleted   BIT default 0,
-       is_dispo     BIT default 0,
-       date_emprunt DATE,
-       dateReturn DATE
+   id           INT PRIMARY KEY AUTO_INCREMENT ,
+   name         VARCHAR(255),
+   lastName     VARCHAR(255),
+   is_deleted   BIT default 0,
+   is_dispo     BIT default 0,
+   date_emprunt DATE,
+   dateReturn DATE
 );
 CREATE TABLE LivreEmprunteur
 (
     id         INT PRIMARY KEY AUTO_INCREMENT,
-    livre      INT,
-    emprunteur INT,
-    FOREIGN KEY (livre) REFERENCES LIVRE (id),
-    FOREIGN KEY (emprunteur) REFERENCES Emprunteur (id)
-)
+    livre_id      INT,
+    emprunteur_id INT,
+    FOREIGN KEY (livre_id) REFERENCES LIVRE (id),
+    FOREIGN KEY (emprunteur_id) REFERENCES Emprunteur (id)
+);
 
 
 DELIMITER //
@@ -47,21 +47,6 @@ BEGIN
     UPDATE  Livre
     SET     qnt = qnt + 1
     WHERE   id = OLD.livre_id;
-END;
-//
+END
+    //
 DELIMITER ;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -12,6 +12,14 @@ public class Livre {
 
     private List<Emprunteur> emprunteurs ;
 
+    public Livre(int id, String titre, String isbn, long qnt, Auteur auteur, List<Emprunteur> emprunteurs) {
+        this.id = id;
+        this.titre = titre;
+        this.isbn = isbn;
+        this.qnt = qnt;
+        this.auteur = auteur;
+        this.emprunteurs = emprunteurs;
+    }
 
     public int getId() {
         return id;
