@@ -19,6 +19,12 @@ public class Persone {
         this.nationalite = nationalite;
         this.date_naissance = date_naissance;
     }
+    public Persone(String name, String lastName, String nationalite, Date date_naissance) {
+        this.name = name;
+        this.lastName = lastName;
+        this.nationalite = nationalite;
+        this.date_naissance = date_naissance;
+    }
 
     public int getId() {
         return id;

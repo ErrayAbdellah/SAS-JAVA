@@ -8,17 +8,25 @@ public class Livre {
     private String titre ;
     private String isbn ;
     private long qnt ;
+
     private Auteur auteur ;
+
 
     private List<Emprunteur> emprunteurs ;
 
-    public Livre(int id, String titre, String isbn, long qnt, Auteur auteur, List<Emprunteur> emprunteurs) {
+    public Livre(){} ;
+    public Livre(int id, String titre, String isbn, long qnt , List<Emprunteur> emprunteurs) {
         this.id = id;
         this.titre = titre;
         this.isbn = isbn;
         this.qnt = qnt;
-        this.auteur = auteur;
         this.emprunteurs = emprunteurs;
+    }
+    public Livre(String titre, String isbn, long qnt,Auteur auteur) {
+        this.titre = titre;
+        this.isbn = isbn;
+        this.qnt = qnt;
+        this.auteur = auteur ;
     }
 
     public int getId() {
@@ -45,6 +53,14 @@ public class Livre {
         this.isbn = isbn;
     }
 
+    public Auteur getAuteur() {
+        return auteur;
+    }
+
+    public void setAuteur(Auteur auteur) {
+        this.auteur = auteur;
+    }
+
     public long getQnt() {
         return qnt;
     }
@@ -53,13 +69,7 @@ public class Livre {
         this.qnt = qnt;
     }
 
-    public Auteur getAuteur() {
-        return auteur;
-    }
 
-    public void setAuteur(Auteur auteur) {
-        this.auteur = auteur;
-    }
 
     public List<Emprunteur> getEmprunteurs() {
         return emprunteurs;
@@ -76,7 +86,7 @@ public class Livre {
                 ", titre='" + titre + '\'' +
                 ", isbn='" + isbn + '\'' +
                 ", qnt=" + qnt +
-                ", auteur=" + auteur +
+                ",auteur="+auteur+
                 ", emprunteurs=" + emprunteurs +
                 '}';
     }

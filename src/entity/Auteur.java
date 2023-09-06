@@ -12,7 +12,9 @@ public class Auteur extends Persone {
 
     public Auteur(int id, String name, String lastName, String nationalite, Date date_naissance) {
         super(id,name, lastName, nationalite, date_naissance);
-
+    }
+    public Auteur(String name, String lastName, String nationalite, Date date_naissance) {
+        super(name, lastName, nationalite, date_naissance);
     }
 
     public List<Livre> getLivres() {

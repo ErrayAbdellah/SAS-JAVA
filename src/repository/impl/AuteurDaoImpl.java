@@ -1,7 +1,7 @@
-package dao.impl;
+package repository.impl;
 
-import dao.DbConnection;
-import dao.IAuteurDao;
+import db.DbConnection;
+import repository.IAuteurDao;
 import entity.Auteur;
 
 import java.sql.*;
@@ -57,12 +57,13 @@ public class AuteurDaoImpl implements IAuteurDao {
 
     @Override
     public List<Auteur> findAll() {
-            List<Auteur> auteurs = new ArrayList<>();
+        List<Auteur> auteurs = new ArrayList<>();
         try{
-            Auteur auteur = new Auteur();
+            //Auteur auteur = new Auteur();
             PreparedStatement statement = cn.prepareStatement(FIND_ALL);
             ResultSet rs = statement.executeQuery();
             while (rs.next()){
+                Auteur auteur = new Auteur();
                 auteur.setId(rs.getInt(1));
                 auteur.setName(rs.getString(2));
                 auteur.setLastName(rs.getString(3));

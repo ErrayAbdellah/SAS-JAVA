@@ -1,6 +1,6 @@
-package dao.impl;
+package repository.impl;
 
-import dao.IEmprunteurDao;
+import repository.IEmprunteurDao;
 import entity.Emprunteur;
 
 import java.util.List;
