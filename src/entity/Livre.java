@@ -15,11 +15,12 @@ public class Livre {
     private List<Emprunteur> emprunteurs ;
 
     public Livre(){} ;
-    public Livre(int id, String titre, String isbn, long qnt , List<Emprunteur> emprunteurs) {
+    public Livre(int id, String titre, String isbn, long qnt ,Auteur auteur) {
         this.id = id;
         this.titre = titre;
         this.isbn = isbn;
         this.qnt = qnt;
+        this.auteur = auteur;
         this.emprunteurs = emprunteurs;
     }
     public Livre(String titre, String isbn, long qnt,Auteur auteur) {

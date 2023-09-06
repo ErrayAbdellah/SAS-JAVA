@@ -12,14 +12,11 @@ import java.util.List;
 public class LivreDaoImpl implements ILivreDao {
     Connection cn = DbConnection.dbConnection();
     private final String INSERT = "INSERT INTO livre( titre, isbn, qnt, auteur_id) VALUES (?,?,?,?)";
-    private final String FIND_BY_ID = "SELECT l.id, titre, isbn, qnt, auteur_id, a.name, a.lastName, a.nationalite, a.date_naissance FROM livre AS l INNER JOIN auteur as a ON a.id = l.id  WHERE l.id = ?";
+    private final String FIND_BY_ID = "SELECT l.id, titre, isbn, qnt, auteur_id, a.name, a.lastName, a.nationalite, a.date_naissance FROM livre AS l INNER JOIN auteur as a ON a.id = l.auteur_id  WHERE l.id = ?";
     private final  String FIND_ALL = "SELECT l.id, titre, isbn, qnt, auteur_id, a.name, a.lastName, a.nationalite, a.date_naissance FROM livre AS l INNER JOIN auteur as a ON a.id = l.auteur_id";
-    private final String UPDATE = "UPDATE auteur SET name = ?, lastName = ?,nationalite =?,date_naissance = ? WHERE id = ?";
-    private final String DELETE = "DELETE FROM auteur WHERE id = ?";
+    private final String UPDATE = "UPDATE livre SET titre = ?, isbn = ?, qnt = ?, auteur_id = ? WHERE id = ?";
+    private final String DELETE = "DELETE FROM livre WHERE id = ?";
 
-    public LivreDaoImpl(){
-
-    }
     @Override
     public void add(Livre livre) {
         try{
@@ -56,6 +53,7 @@ public class LivreDaoImpl implements ILivreDao {
                 auteur.setNationalite(resultSet.getString(8));
                 auteur.setDate_naissance(Date.valueOf(resultSet.getString(9)));
                 livre.setAuteur(auteur);
+                System.out.println(livre);
             }
         }catch (SQLException e){
             e.printStackTrace();
@@ -91,18 +89,32 @@ public class LivreDaoImpl implements ILivreDao {
         }catch (SQLException e){
             e.printStackTrace();
         }
-        System.out.println(livres);
         return livres;
     }
 
     @Override
     public void update(Livre livre) {
-        List<Livre> livres = new ArrayList<>();
-        System.out.println(livres);
+       try{
+           PreparedStatement statement = cn.prepareStatement(UPDATE);
+           statement.setString(1,livre.getTitre());
+           statement.setString(2,livre.getIsbn());
+           statement.setInt(3,(int) livre.getQnt());
+           statement.setInt(4,livre.getAuteur().getId());
+           statement.setInt(5,livre.getId());
+           statement.executeUpdate();
+       }catch (SQLException e){
+           e.printStackTrace();
+       }
     }
 
     @Override
     public void delete(int id) {
-
+        try {
+            PreparedStatement statement = cn.prepareStatement(DELETE);
+            statement.setInt(1,id);
+            statement.executeUpdate();
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
     }
 }

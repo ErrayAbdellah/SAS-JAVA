@@ -51,10 +51,11 @@ public class Main {
         LivreDaoImpl livreDao = new LivreDaoImpl();
 //       auteurDao.update(auteur);
 
-            Livre livre = new Livre("Livre3","12345",12,auteurDao.findById(2));
+            Livre livre = new Livre(1,"Livre3","12345",12,auteurDao.findById(2));
 
             //livreDao.add(livre);
-        livreDao.findAll();
+        livreDao.delete(5);
+        System.out.println(livreDao.findById(5));
         livreDao.update(livre);
 
         }
