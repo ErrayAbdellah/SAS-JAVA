@@ -1,5 +1,6 @@
-package dao;
+package repository;
 
+import entity.Auteur;
 import entity.Livre;
 
 import java.util.List;

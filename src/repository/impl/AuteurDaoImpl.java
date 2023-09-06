@@ -1,7 +1,7 @@
-package dao.impl;
+package repository.impl;
 
-import dao.DbConnection;
-import dao.IAuteurDao;
+import db.DbConnection;
+import repository.IAuteurDao;
 import entity.Auteur;
 
 import java.sql.*;
@@ -15,7 +15,8 @@ public class AuteurDaoImpl implements IAuteurDao {
     private final  String FIND_ALL = "SELECT * FROM auteur";
     private final String UPDATE = "UPDATE auteur SET name = ?, lastName = ?,nationalite =?,date_naissance = ? WHERE id = ?";
     private final String DELETE = "DELETE FROM auteur WHERE id = ?";
-
+    private Auteur auteur = new Auteur();
+    private List<Auteur> auteurs = new ArrayList<>();
     @Override
     public void add(Auteur auteur) {
         try {
@@ -34,7 +35,6 @@ public class AuteurDaoImpl implements IAuteurDao {
 
     @Override
     public Auteur findById(int id) {
-            Auteur auteur = new Auteur();
         try {
             PreparedStatement statement = cn.prepareStatement(FIND_BY_ID);
             statement.setInt(1,id);
@@ -57,9 +57,9 @@ public class AuteurDaoImpl implements IAuteurDao {
 
     @Override
     public List<Auteur> findAll() {
-            List<Auteur> auteurs = new ArrayList<>();
+
         try{
-            Auteur auteur = new Auteur();
+            //Auteur auteur = new Auteur();
             PreparedStatement statement = cn.prepareStatement(FIND_ALL);
             ResultSet rs = statement.executeQuery();
             while (rs.next()){
