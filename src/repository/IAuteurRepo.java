@@ -5,7 +5,7 @@ import entity.Auteur;
 import java.sql.SQLException;
 import java.util.List;
 
-public interface IAuteurDao {
+public interface IAuteurRepo {
     void add(Auteur auteur) throws SQLException;
     Auteur findById(int id);
     List<Auteur> findAll();

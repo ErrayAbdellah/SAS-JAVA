@@ -1,16 +1,37 @@
+import controller.LivreController;
 import db.DbConnection;
-import entity.Auteur;
 import entity.Livre;
-import repository.impl.AuteurDaoImpl;
-import repository.impl.LivreDaoImpl;
+import repository.ILivreRepo;
+import repository.impl.AuteurRepoImpl;
+import repository.impl.LivreRepoImpl;
+import service.LivreService;
 
 import java.sql.Connection;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Scanner;
 
 public class Main {
-
+    public static int print(int choix){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("\n");
+        System.out.println("\t*************************************************");
+        System.out.println("\t*\t1  -  Ajouter un livre \t\t\t\t\t\t*");
+        System.out.println("\t*	2  - Rechercher un livre par ID\t\t\t\t*");
+        System.out.println("\t*	3  - Rechercher tous les livres\t\t\t\t*");
+        System.out.println("\t*	4  - Supprimer le livre\t\t\t\t\t\t*");
+        System.out.println("\t*	5  - Rechercher des livres par titre\t\t*");
+        System.out.println("\t*	6  - Rechercher des livres par auteur\t\t*");
+        System.out.println("\t*	0  - Quitter \t\t\t\t\t\t\t\t*");
+        System.out.println("\t*************************************************\n");
+        do {
+            System.out.println("\nChoisissez le numero de l'operation que vous souhaitez effectuer : ");
+            choix = scanner.nextInt();
+            //if ()
+        }while (choix<0 || choix>8);
+        return choix ;
+    }
     public static Date convertDate(String startDate) {
         try {
 
@@ -26,38 +47,43 @@ public class Main {
     }
 
     public static void main(String[] args) throws ParseException {
+        ILivreRepo livreRepo = new LivreRepoImpl();
+        LivreService livreService = new LivreService(livreRepo);
+        LivreController livreController =new LivreController(livreService);
 
         Connection connection = DbConnection.dbConnection();
 //        if (connection == null) {
 //            System.out.println("error");
 
-//        Scanner scanner = new Scanner(System.in);
-//
-//        System.out.println("Enter your ID: ");
-//        int id = Integer.parseInt(scanner.nextLine());
-//        System.out.println("Enter your name: ");
-//        String name = scanner.nextLine();
-//        System.out.println("Enter your Last name: ");
-//        String lastName = scanner.nextLine();
-//        System.out.println("Enter your nationalité: ");
-//        String nationalite = scanner.nextLine();
-//        System.out.println("Enter your birthday ");
-//        String birthday = scanner.nextLine();
-//        Auteur auteur = new Auteur(id,name, lastName, nationalite, convertDate(birthday));
-        //Auteur auteur = new Auteur("name", "lastName", "nationalite", convertDate(birthday));
 
-//
-       AuteurDaoImpl auteurDao = new AuteurDaoImpl();
-        LivreDaoImpl livreDao = new LivreDaoImpl();
-//       auteurDao.update(auteur);
+        int choix=0 ;
 
-            Livre livre = new Livre(1,"Livre3","12345",12,auteurDao.findById(2));
+         while (true){
 
-            //livreDao.add(livre);
-        livreDao.delete(5);
-        System.out.println(livreDao.findById(5));
-        livreDao.update(livre);
+             choix = print(choix);
 
-        }
+            switch (choix){
+                case 1:
+                    livreController.add();
+                    break;
+                case 2:
+                    livreController.trouverLivreParId();
+                    break;
+                case 3:
+                    livreController.trouverTousLesLivres();
+                    break;
+                case 4:
+                    break;
+                case 5:
+                    break;
+                case 6:
+                    break;
+                case 0:
+                    break;
+            }
+            if (choix == 0 ) break;
+         }
+
     }
+}
 

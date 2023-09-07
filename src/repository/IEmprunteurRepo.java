@@ -4,7 +4,7 @@ import entity.Emprunteur;
 
 import java.util.List;
 
-public interface IEmprunteurDao {
+public interface IEmprunteurRepo {
     void add(Emprunteur emprunteur);
     Emprunteur findById(int id);
     List<Emprunteur> findAll();

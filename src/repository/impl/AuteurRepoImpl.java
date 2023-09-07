@@ -1,14 +1,14 @@
 package repository.impl;
 
 import db.DbConnection;
-import repository.IAuteurDao;
+import repository.IAuteurRepo;
 import entity.Auteur;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AuteurDaoImpl implements IAuteurDao {
+public class AuteurRepoImpl implements IAuteurRepo {
     private Connection cn = DbConnection.dbConnection();
     private final String INSERT = "INSERT INTO auteur(name ,lastName,nationalite,date_naissance) VALUES(?,?,?,?)";
     private final String FIND_BY_ID = "SELECT id, name,lastName, nationalite,date_naissance FROM auteur WHERE id = ? ";

@@ -1,11 +1,11 @@
 package repository.impl;
 
-import repository.IEmprunteurDao;
+import repository.IEmprunteurRepo;
 import entity.Emprunteur;
 
 import java.util.List;
 
-public class EmprunteurDaoImpl implements IEmprunteurDao {
+public class EmprunteurRepoImpl implements IEmprunteurRepo {
     @Override
     public void add(Emprunteur emprunteur) {
         
