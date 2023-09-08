@@ -1,11 +1,18 @@
+import controller.EmprunteurController;
 import controller.LivreController;
 import db.DbConnection;
 import entity.Livre;
+import repository.IEmprunteurRepo;
+import repository.ILivreEmprunteurRepo;
 import repository.ILivreRepo;
 import repository.impl.AuteurRepoImpl;
+import repository.impl.EmprunteurRepoImpl;
+import repository.impl.LivreEmprunteurImpl;
 import repository.impl.LivreRepoImpl;
+import service.EmprunteurService;
 import service.LivreService;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.Date;
 import java.text.ParseException;
@@ -14,6 +21,7 @@ import java.util.Scanner;
 
 public class Main {
     public static int print(int choix){
+
         Scanner scanner = new Scanner(System.in);
         System.out.println("\n");
         System.out.println("\t*************************************************");
@@ -23,33 +31,29 @@ public class Main {
         System.out.println("\t*	4  - Supprimer le livre\t\t\t\t\t\t*");
         System.out.println("\t*	5  - Rechercher des livres par titre\t\t*");
         System.out.println("\t*	6  - Rechercher des livres par auteur\t\t*");
+        System.out.println("\t*	7  - Emprunte livre\t\t*");
         System.out.println("\t*	0  - Quitter \t\t\t\t\t\t\t\t*");
         System.out.println("\t*************************************************\n");
+
         do {
             System.out.println("\nChoisissez le numero de l'operation que vous souhaitez effectuer : ");
             choix = scanner.nextInt();
+
             //if ()
         }while (choix<0 || choix>8);
         return choix ;
     }
-    public static Date convertDate(String startDate) {
-        try {
 
-            SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy/mm/dd");
-            java.util.Date date = sdf1.parse(startDate);
-            java.sql.Date sqlStartDate = new java.sql.Date(date.getTime());
-            System.out.println(sqlStartDate);
-            return sqlStartDate ;
-        }catch (ParseException e){
-            e.getMessage();
-        }
-        return null;
-    }
-
-    public static void main(String[] args) throws ParseException {
+    public static void main(String[] args) throws Exception {
         ILivreRepo livreRepo = new LivreRepoImpl();
+        IEmprunteurRepo iEmprunteurRepo = new EmprunteurRepoImpl();
+        ILivreEmprunteurRepo livreEmprunteurRepo = new LivreEmprunteurImpl();
+
         LivreService livreService = new LivreService(livreRepo);
-        LivreController livreController =new LivreController(livreService);
+        EmprunteurService emprunteurService = new EmprunteurService(iEmprunteurRepo);
+
+        LivreController livreController = new LivreController(livreService);
+        EmprunteurController emprunteurController = new EmprunteurController(emprunteurService,livreService);
 
         Connection connection = DbConnection.dbConnection();
 //        if (connection == null) {
@@ -77,6 +81,9 @@ public class Main {
                 case 5:
                     break;
                 case 6:
+                    break;
+                case 7:
+                    emprunteurController.emprunteLivre();
                     break;
                 case 0:
                     break;

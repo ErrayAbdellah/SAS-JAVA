@@ -98,10 +98,6 @@ public class LivreRepoImpl implements ILivreRepo {
 
     @Override
     public void update(Livre livre) {
-       if (findById(livre.getId())==null){
-           System.out.println();
-           return;
-       }
         try{
            PreparedStatement statement = cn.prepareStatement(UPDATE);
            statement.setString(1,livre.getTitre());

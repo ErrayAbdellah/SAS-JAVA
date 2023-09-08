@@ -8,6 +8,7 @@ public class Emprunteur extends Persone {
     private boolean is_dispo;
     private Date date_emprunt;
     private Date dateReturn;
+    private Livre livre;
     private List<Livre> livres;
 
     public Emprunteur(){
@@ -61,6 +62,14 @@ public class Emprunteur extends Persone {
         this.livres = livres;
     }
 
+    public Livre getLivre() {
+        return livre;
+    }
+
+    public void setLivre(Livre livre) {
+        this.livre = livre;
+    }
+
     @Override
     public String toString() {
         return "Emprunteur{" +
@@ -69,6 +78,7 @@ public class Emprunteur extends Persone {
                 ", date_emprunt=" + date_emprunt +
                 ", dateReturn=" + dateReturn +
                 ", emprunteurs=" + livres +
+                ", livre=" + livre +
                 '}';
     }
 }

@@ -24,7 +24,6 @@ CREATE TABLE Emprunteur(
    name         VARCHAR(255),
    lastName     VARCHAR(255),
    is_deleted   BIT default 0,
-   is_dispo     BIT default 0,
    date_emprunt DATE,
    dateReturn DATE
 );

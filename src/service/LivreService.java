@@ -26,10 +26,9 @@ public class LivreService {
     }
     public Livre   trouverLivreParId(int id){
         Livre livre =new Livre();
-
         livre = repo.findById(id);
         if (livre == null){
-            System.out.println("ne trouve pas cette livre");
+            System.out.println("Il n'y a pas de livre");
             return null;
         }else {
             return livre ;

@@ -40,7 +40,6 @@ public class AuteurRepoImpl implements IAuteurRepo {
             statement.setInt(1,id);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()){
-                System.out.println();
                 auteur.setId(resultSet.getInt(1));
                 auteur.setName(resultSet.getString(2));
                 auteur.setLastName(resultSet.getString(3));
