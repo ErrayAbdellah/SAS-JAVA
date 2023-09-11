@@ -11,4 +11,5 @@ public interface IEmprunteurRepo {
     List<Emprunteur> findAll();
     void update(Emprunteur emprunteur);
     void delete(int id);
+    Emprunteur lastColumn() throws SQLException;
 }

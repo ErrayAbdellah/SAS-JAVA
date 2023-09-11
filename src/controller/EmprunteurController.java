@@ -9,6 +9,7 @@ import service.LivreService;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 
@@ -39,12 +40,14 @@ public class EmprunteurController {
     public void emprunteLivre() throws Exception {
         Emprunteur emprunteur = new Emprunteur();
         Livre livre = new Livre();
+        LocalDate localDate = LocalDate.now();
         System.out.println("Enter name : ");
         emprunteur.setName(scanner.nextLine());
         System.out.println("Enter Last name : ");
         emprunteur.setLastName(scanner.nextLine());
         System.out.println("Enter date return : ");
         emprunteur.setDateReturn(convertDate(scanner.nextLine()));
+        emprunteur.setDate_emprunt(Date.valueOf(localDate));
 
         List<Livre> listeLivres = livreService.trouverTousLesLivres();
 
@@ -56,11 +59,10 @@ public class EmprunteurController {
             System.out.println("Auteur ID : " + livr.getAuteur());
             System.out.println(); // Ligne vide pour séparer les livres
         }
-        System.out.println("Choice livre  id de livre");
+        System.out.println("Sélectionnez id du livre");
         livre = livreService.trouverLivreParId(Integer.parseInt(scanner.nextLine()));
         emprunteur.setLivre(livre);
         emprunteurService.ajouterEmprunte(emprunteur);
-        System.out.println(emprunteur);
 
     }
 }

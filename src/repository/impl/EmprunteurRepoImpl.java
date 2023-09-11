@@ -6,20 +6,32 @@ import entity.Emprunteur;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
 public class EmprunteurRepoImpl implements IEmprunteurRepo {
     private final String ADD= "INSERT INTO emprunteur (name, lastName, date_emprunt, dateReturn) VALUES (?,?,?,?)";
+    private final String SELECT_LAST_COLUMN = "SELECT id FROM emprunteur ORDER BY id DESC LIMIT 1;";
     Connection cn = DbConnection.dbConnection();
     @Override
     public void add(Emprunteur emprunteur) throws SQLException {
         PreparedStatement statement = cn.prepareStatement(ADD);
         statement.setString(1,emprunteur.getName());
         statement.setString(2,emprunteur.getLastName());
-        statement.setString(3,emprunteur.getName());
-        statement.setString(4,emprunteur.getName());
+        statement.setDate(3,emprunteur.getDate_emprunt());
+        statement.setDate(4,emprunteur.getDateReturn());
         statement.executeUpdate();
+    }
+    @Override
+    public Emprunteur lastColumn() throws SQLException {
+        Emprunteur emprunteur = new Emprunteur();
+        PreparedStatement statement = cn.prepareStatement(SELECT_LAST_COLUMN);
+        ResultSet resultSet = statement.executeQuery();
+        if (resultSet.next()){
+            emprunteur.setId(resultSet.getInt(1));
+            return emprunteur ;
+        }else return null ;
     }
 
     @Override

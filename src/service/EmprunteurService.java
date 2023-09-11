@@ -15,6 +15,7 @@ public class EmprunteurService {
     public void ajouterEmprunte(Emprunteur emprunteur) throws Exception{
         ILivreEmprunteurRepo livreEmprunteurRepo = new LivreEmprunteurImpl();
         repo.add(emprunteur);
+        emprunteur.setId(repo.lastColumn().getId());
         livreEmprunteurRepo.add(emprunteur,emprunteur.getLivre());
     }
 }
