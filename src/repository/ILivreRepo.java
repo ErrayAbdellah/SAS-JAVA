@@ -2,6 +2,7 @@ package repository;
 
 import entity.Livre;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public interface ILivreRepo {
@@ -12,4 +13,5 @@ public interface ILivreRepo {
     void delete(int id);
     List<Livre> searchByTitre(String titre);
     List<Livre> searchByََAuteur(String titre);
+    int checkQnt(int id) throws SQLException;
 }

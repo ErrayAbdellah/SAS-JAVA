@@ -12,13 +12,15 @@ import java.util.List;
 
 public class LivreEmprunteurImpl implements ILivreEmprunteurRepo {
     private final Connection cn = DbConnection.dbConnection();
-    private final String ADD = "INSERT INTO livreemprunteur(livre_id, emprunteur_id) VALUES (?,?);";
+    private final String ADD = "INSERT INTO livreemprunteur(livre_id, emprunteur_id) VALUES (?,?); ";
     private final String DELETE = "DELETE FROM livreemprunteur WHERE id = ?";
+
     @Override
     public void add(Emprunteur emprunteur, Livre livre) throws SQLException {
         PreparedStatement statement = cn.prepareStatement(ADD);
         statement.setInt(1,livre.getId());
         statement.setInt(2,emprunteur.getId());
+
         statement.executeUpdate();
     }
 

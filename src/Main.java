@@ -1,22 +1,13 @@
 import controller.EmprunteurController;
 import controller.LivreController;
-import db.DbConnection;
-import entity.Livre;
 import repository.IEmprunteurRepo;
 import repository.ILivreEmprunteurRepo;
 import repository.ILivreRepo;
-import repository.impl.AuteurRepoImpl;
 import repository.impl.EmprunteurRepoImpl;
 import repository.impl.LivreEmprunteurImpl;
 import repository.impl.LivreRepoImpl;
 import service.EmprunteurService;
 import service.LivreService;
-
-import java.io.IOException;
-import java.sql.Connection;
-import java.sql.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Scanner;
 
 public class Main {
@@ -39,7 +30,6 @@ public class Main {
             System.out.println("\nChoisissez le numero de l'operation que vous souhaitez effectuer : ");
             choix = scanner.nextInt();
 
-            //if ()
         }while (choix<0 || choix>8);
         return choix ;
     }
@@ -50,14 +40,10 @@ public class Main {
         ILivreEmprunteurRepo livreEmprunteurRepo = new LivreEmprunteurImpl();
 
         LivreService livreService = new LivreService(livreRepo);
-        EmprunteurService emprunteurService = new EmprunteurService(iEmprunteurRepo);
+        EmprunteurService emprunteurService = new EmprunteurService(iEmprunteurRepo,livreRepo);
 
         LivreController livreController = new LivreController(livreService);
         EmprunteurController emprunteurController = new EmprunteurController(emprunteurService,livreService);
-
-        Connection connection = DbConnection.dbConnection();
-//        if (connection == null) {
-//            System.out.println("error");
 
 
         int choix=0 ;

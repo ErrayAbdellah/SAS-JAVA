@@ -18,6 +18,7 @@ public class LivreRepoImpl implements ILivreRepo {
     private final String DELETE = "DELETE FROM livre WHERE id = ?";
     private final String SEARCH_By_TITRE = "SELECT l.id, titre, isbn, qnt, auteur_id, a.name, a.lastName, a.nationalite, a.date_naissance FROM livre AS l INNER JOIN auteur as a ON a.id = l.auteur_id  WHERE l.titre like CONCAT('%',?,'%')";
     private final String SEARCH_By_AUTEUR = "SELECT l.id, titre, isbn, qnt, auteur_id, a.name, a.lastName, a.nationalite, a.date_naissance FROM livre AS l INNER JOIN auteur as a ON a.id = l.auteur_id  WHERE a.name like CONCAT('%',?,'%')";
+    private final String CHECK_QNT =  "SELECT qnt FROM `livre` WHERE id = ?";
 
     @Override
     public void add(Livre livre) {
@@ -190,6 +191,21 @@ public class LivreRepoImpl implements ILivreRepo {
             e.printStackTrace();
         }
         return livres;
+    }
+
+    @Override
+    public int checkQnt(int id) throws SQLException{
+        PreparedStatement statement = cn.prepareStatement(CHECK_QNT);
+        statement.setInt(1,id);
+        ResultSet resultSet = statement.executeQuery();
+        if (resultSet.next()){
+            System.out.println(resultSet.getInt(1));
+            return  resultSet.getInt(1);
+        }else if (resultSet.wasNull()){
+            return 0 ;
+        }
+        return 0 ;
+
     }
 
 }

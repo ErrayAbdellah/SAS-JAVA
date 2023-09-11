@@ -3,6 +3,7 @@ package service;
 import entity.Livre;
 import repository.ILivreRepo;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 

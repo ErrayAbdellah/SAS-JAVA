@@ -1,6 +1,7 @@
 package repository.impl;
 
 import db.DbConnection;
+import entity.Livre;
 import repository.IEmprunteurRepo;
 import entity.Emprunteur;
 
@@ -13,6 +14,7 @@ import java.util.List;
 public class EmprunteurRepoImpl implements IEmprunteurRepo {
     private final String ADD= "INSERT INTO emprunteur (name, lastName, date_emprunt, dateReturn) VALUES (?,?,?,?)";
     private final String SELECT_LAST_COLUMN = "SELECT id FROM emprunteur ORDER BY id DESC LIMIT 1;";
+    private final String DECR = "UPDATE livre SET qnt = qnt -1 WHERE id = ?;";
     Connection cn = DbConnection.dbConnection();
     @Override
     public void add(Emprunteur emprunteur) throws SQLException {
@@ -32,6 +34,14 @@ public class EmprunteurRepoImpl implements IEmprunteurRepo {
             emprunteur.setId(resultSet.getInt(1));
             return emprunteur ;
         }else return null ;
+    }
+
+    @Override
+    public void decr(int id) throws SQLException {
+        PreparedStatement statement = cn.prepareStatement(DECR);
+        statement.setInt(1,id);
+        statement.executeUpdate();
+
     }
 
     @Override
