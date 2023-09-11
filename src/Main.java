@@ -3,6 +3,7 @@ import controller.LivreController;
 import repository.IEmprunteurRepo;
 import repository.ILivreEmprunteurRepo;
 import repository.ILivreRepo;
+import repository.StatistiqueService;
 import repository.impl.EmprunteurRepoImpl;
 import repository.impl.LivreEmprunteurImpl;
 import repository.impl.LivreRepoImpl;
@@ -22,7 +23,8 @@ public class Main {
         System.out.println("\t*	4  - Supprimer le livre\t\t\t\t\t\t*");
         System.out.println("\t*	5  - Rechercher des livres par titre\t\t*");
         System.out.println("\t*	6  - Rechercher des livres par auteur\t\t*");
-        System.out.println("\t*	7  - Emprunte livre\t\t*");
+        System.out.println("\t*	7  - Emprunte livre\t\t\t*");
+        System.out.println("\t*	8  - Statistique \t\t\t\t\t\t\t\t*");
         System.out.println("\t*	0  - Quitter \t\t\t\t\t\t\t\t*");
         System.out.println("\t*************************************************\n");
 
@@ -70,6 +72,9 @@ public class Main {
                     break;
                 case 7:
                     emprunteurController.emprunteLivre();
+                    break;
+                case 8:
+                    StatistiqueService.generateReport();
                     break;
                 case 0:
                     break;

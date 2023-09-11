@@ -50,6 +50,8 @@ END
     //
 DELIMITER ;
 
+ALTER TABLE livreemprunteur
+    ADD COLUMN perdus Bit DEFAULT 0 ;
 
 -- Insert sample data into Auteur table
 INSERT INTO Auteur (name, lastName, nationalite, date_naissance)
@@ -88,4 +90,4 @@ VALUES
     (4, 4); -- Book 4 borrowed by David;
 #SELECT * FROM livre WHERE qnt > 0 ;
 #SELECT l.* FROM livre AS l INNER JOIN livreemprunteur AS le ON l.id = le.livre_id
-#SELECT * FROM livre WHERE
+#SELECT l.* FROM livre As l INNER JOIN livreemprunteur AS le ON l.id = le.livre_id WHERE le.perdus = true
