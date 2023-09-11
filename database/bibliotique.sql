@@ -86,3 +86,6 @@ VALUES
     (3, 3), -- Book 3 borrowed by Charlie
     -- Add more LivreEmprunteur records as needed
     (4, 4); -- Book 4 borrowed by David;
+#SELECT * FROM livre WHERE qnt > 0 ;
+#SELECT l.* FROM livre AS l INNER JOIN livreemprunteur AS le ON l.id = le.livre_id
+#SELECT * FROM livre WHERE
