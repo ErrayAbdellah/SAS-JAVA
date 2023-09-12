@@ -17,6 +17,7 @@ import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -29,11 +30,12 @@ public class Main {
         System.out.println("\t*\t1  -  Ajouter un livre \t\t\t\t\t\t*");
         System.out.println("\t*	2  - Rechercher un livre par ID\t\t\t\t*");
         System.out.println("\t*	3  - Rechercher tous les livres\t\t\t\t*");
-        System.out.println("\t*	4  - Supprimer le livre\t\t\t\t\t\t*");
-        System.out.println("\t*	5  - Rechercher des livres par titre\t\t*");
-        System.out.println("\t*	6  - Rechercher des livres par auteur\t\t*");
-        System.out.println("\t*	7  - Emprunte livre\t\t\t\t\t\t\t*");
-        System.out.println("\t*	8  - Statistique \t\t\t\t\t\t\t*");
+        System.out.println("\t*	4  - Rechercher tous les livres\t\t\t\t*");
+        System.out.println("\t*	5  - Supprimer le livre\t\t\t\t\t\t*");
+        System.out.println("\t*	6  - Rechercher des livres par titre\t\t*");
+        System.out.println("\t*	7  - Rechercher des livres par auteur\t\t*");
+        System.out.println("\t*	8  - Emprunte livre\t\t\t\t\t\t\t*");
+        System.out.println("\t*	9  - Statistique \t\t\t\t\t\t\t*");
         System.out.println("\t*	0  - Quitter \t\t\t\t\t\t\t\t*");
         System.out.println("\t*************************************************\n");
 
@@ -94,7 +96,7 @@ public class Main {
 
 
         int choix=0 ;
-        callMeth :
+        int choixEdite = 0 ;
          while (true){
 
              choix = print(choix);
@@ -129,25 +131,39 @@ public class Main {
                     if ((livreController.trouverLivreParId(id) == null)) {
                         System.out.println("Il n'y a pas de livre");
                     } else {
-                        System.out.println(livreController.trouverLivreParId(id));
+                        List<Livre> livres = new ArrayList<>() ;
+                        livres.add(livreController.trouverLivreParId(id));
+                        afficherLivres(livres);
                     }
                     break;
                 case 3:
                     afficherLivres(livreController.trouverTousLesLivres());
-                    break callMeth;
+                    break;
                 case 4:
+                    System.out.println("enter");
+                    System.out.println("enter");
+                    System.out.println("enter");
+                    System.out.println("enter");
+                    System.out.println("enter");
+
                     break;
                 case 5:
-                    System.out.println("entre Titre de livre");
-                    String titre = scanner.nextLine();
-                    afficherLivres(livreController.livresParTitre(titre));
                     break;
                 case 6:
+                    System.out.println("entre Titre de livre");
+                    String titre = scanner.nextLine();
+                    if (livreController.livresParTitre(titre) == null) {
+                        System.out.println("Il n'y a pas de livre");
+                    }else {
+                        afficherLivres(livreController.livresParTitre(titre));
+                    }
+                    break;
+                case 7:
                     System.out.println("entre Nom de auteur");
                     String nom = scanner.nextLine();
                     afficherLivres(livreController.livresParAuteur(nom));
                     break;
-                case 7:
+                case 8:
                     Emprunteur emprunteur = new Emprunteur();
                     livre = new Livre();
                     LocalDate localDate = LocalDate.now();
@@ -165,7 +181,7 @@ public class Main {
                     livre = livreService.trouverLivreParId(Integer.parseInt(scanner.nextLine()));
                     emprunteurController.emprunteLivre(emprunteur,livre);
                     break;
-                case 8:
+                case 9:
                     StatistiqueService.generateReport();
                     break;
                 case 0:
