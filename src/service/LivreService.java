@@ -13,23 +13,22 @@ public class LivreService {
     public LivreService(ILivreRepo repo){
         this.repo = repo ;
     }
-    public void Addlivra(Livre livre){
+    public String Addlivra(Livre livre){
         if (livre.getIsbn() == null || livre.getIsbn().isEmpty()) {
-            System.out.println("ISBN ne peut pas être vide");
-            return;
+
+            return "ISBN ne peut pas être vide";
         }
         if (livre.getQnt() <= 0) {
-            System.out.println("La quantité (Qnt) doit être supérieure à zéro");
-            return;
+            return "La quantité (Qnt) doit être supérieure à zéro";
         }
 
         repo.add(livre);
+        return "succès, le livre est ajouté";
     }
     public Livre   trouverLivreParId(int id){
-        Livre livre =new Livre();
+        Livre livre = new Livre();
         livre = repo.findById(id);
         if (livre == null){
-            System.out.println("Il n'y a pas de livre");
             return null;
         }else {
             return livre ;
@@ -40,7 +39,6 @@ public class LivreService {
         List<Livre> livres = new ArrayList<>();
         livres = repo.findAll();
         if (livres == null){
-            System.out.println("Il n'y a pas de livre");
             return null;
         }else {
             return livres ;
@@ -56,5 +54,16 @@ public class LivreService {
             return;
         }
         repo.update(livre);
+    }
+
+    public List<Livre> livresParTitre(String titre){
+        List<Livre> livres = new ArrayList<>();
+        livres = repo.searchByTitre(titre);
+        return livres ;
+    }
+    public List<Livre> livresParAuteur(String nom){
+        List<Livre> livres = new ArrayList<>();
+        livres =  repo.searchByََAuteur(nom);
+        return livres;
     }
 }

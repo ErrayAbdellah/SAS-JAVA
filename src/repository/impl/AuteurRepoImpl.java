@@ -1,6 +1,7 @@
 package repository.impl;
 
 import db.DbConnection;
+import entity.Livre;
 import repository.IAuteurRepo;
 import entity.Auteur;
 
@@ -33,7 +34,7 @@ public class AuteurRepoImpl implements IAuteurRepo {
     }
 
     @Override
-    public Auteur findById(int id) {
+    public Auteur findById(int id){
             Auteur auteur = new Auteur();
         try {
             PreparedStatement statement = cn.prepareStatement(FIND_BY_ID);
@@ -58,7 +59,6 @@ public class AuteurRepoImpl implements IAuteurRepo {
     public List<Auteur> findAll() {
         List<Auteur> auteurs = new ArrayList<>();
         try{
-            //Auteur auteur = new Auteur();
             PreparedStatement statement = cn.prepareStatement(FIND_ALL);
             ResultSet rs = statement.executeQuery();
             while (rs.next()){
@@ -73,48 +73,46 @@ public class AuteurRepoImpl implements IAuteurRepo {
         }catch (Exception e){
             e.printStackTrace();
         }
-        System.out.println(auteurs);
         return auteurs;
     }
 
     @Override
-    public void update(Auteur auteur) {
+    public boolean update(Auteur auteur) {
         try{
 
-                if (findById(auteur.getId())==null)
-                {
-                    System.out.println("auteur not found : id = "+ auteur.getId());
-                } else {
-                    PreparedStatement statement = cn.prepareStatement(UPDATE);
-                    //System.out.println(findById(auteur.getId()));
-                    statement.setString(1, auteur.getName());
-                    statement.setString(2, auteur.getLastName());
-                    statement.setString(3, auteur.getNationalite());
-                    statement.setDate(4, auteur.getDate_naissance());
-                    statement.setInt(5,auteur.getId());
-                    statement.executeUpdate();
-                    System.out.println(auteur);
-                }
-
-
+            if (findById(auteur.getId())==null)
+            {
+                return false ;
+            }
+            PreparedStatement statement = cn.prepareStatement(UPDATE);
+            statement.setString(1, auteur.getName());
+            statement.setString(2, auteur.getLastName());
+            statement.setString(3, auteur.getNationalite());
+            statement.setDate(4, auteur.getDate_naissance());
+            statement.setInt(5,auteur.getId());
+            statement.executeUpdate();
+            return true ;
         }catch (SQLException e){
             e.printStackTrace();
+            return false ;
         }
+
     }
 
     @Override
-    public void delete(int id) {
+    public boolean delete(int id) {
         try {
             if (findById(id)==null)
             {
-                System.out.println("auteur not found");
+                return false ;
             }
             PreparedStatement statement = cn.prepareStatement(DELETE);
             statement.setInt(1,id);
             statement.executeUpdate();
-
+            return true ;
         }catch (SQLException e){
             e.printStackTrace();
+            return false ;
         }
     }
 }

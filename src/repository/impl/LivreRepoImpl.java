@@ -45,6 +45,7 @@ public class LivreRepoImpl implements ILivreRepo {
             statement.setInt(1,id);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()){
+
                 livre.setId(resultSet.getInt(1));
                 livre.setTitre(resultSet.getString(2));
                 livre.setIsbn(resultSet.getString(3));
@@ -56,7 +57,6 @@ public class LivreRepoImpl implements ILivreRepo {
                 auteur.setNationalite(resultSet.getString(8));
                 auteur.setDate_naissance(Date.valueOf(resultSet.getString(9)));
                 livre.setAuteur(auteur);
-                System.out.println(livre);
             }else {
                 return null ;
             }
@@ -115,7 +115,6 @@ public class LivreRepoImpl implements ILivreRepo {
     @Override
     public void delete(int id) {
         if (findById(id)==null){
-            System.out.println();
             return;
         }
         try {
@@ -199,7 +198,6 @@ public class LivreRepoImpl implements ILivreRepo {
         statement.setInt(1,id);
         ResultSet resultSet = statement.executeQuery();
         if (resultSet.next()){
-            System.out.println(resultSet.getInt(1));
             return  resultSet.getInt(1);
         }else if (resultSet.wasNull()){
             return 0 ;

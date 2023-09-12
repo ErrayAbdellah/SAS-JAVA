@@ -9,6 +9,6 @@ public interface IAuteurRepo {
     void add(Auteur auteur) throws SQLException;
     Auteur findById(int id);
     List<Auteur> findAll();
-    void update(Auteur auteur);
-    void delete(int id);
+    boolean update(Auteur auteur);
+    boolean delete(int id);
 }

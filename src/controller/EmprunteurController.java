@@ -37,30 +37,8 @@ public class EmprunteurController {
         return null;
     }
 
-    public void emprunteLivre() throws Exception {
-        Emprunteur emprunteur = new Emprunteur();
-        Livre livre = new Livre();
-        LocalDate localDate = LocalDate.now();
-        System.out.println("Enter name : ");
-        emprunteur.setName(scanner.nextLine());
-        System.out.println("Enter Last name : ");
-        emprunteur.setLastName(scanner.nextLine());
-        System.out.println("Enter date return : ");
-        emprunteur.setDateReturn(convertDate(scanner.nextLine()));
-        emprunteur.setDate_emprunt(Date.valueOf(localDate));
+    public void emprunteLivre(Emprunteur emprunteur ,Livre livre) throws Exception {
 
-        List<Livre> listeLivres = livreService.trouverTousLesLivres();
-
-        for (Livre livr : listeLivres) {
-            System.out.println("ID : " + livr.getId());
-            System.out.println("Titre : " + livr.getTitre());
-            System.out.println("ISBN : " + livr.getIsbn());
-            System.out.println("Quantité : " + livr.getQnt());
-            System.out.println("Auteur ID : " + livr.getAuteur());
-            System.out.println(); // Ligne vide pour séparer les livres
-        }
-        System.out.println("Sélectionnez id du livre");
-        livre = livreService.trouverLivreParId(Integer.parseInt(scanner.nextLine()));
         emprunteur.setLivre(livre);
         emprunteurService.ajouterEmprunte(emprunteur);
 

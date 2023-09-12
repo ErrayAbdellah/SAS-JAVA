@@ -6,6 +6,9 @@ import repository.ILivreRepo;
 import repository.impl.LivreRepoImpl;
 import service.LivreService;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 
 public class LivreController {
@@ -16,30 +19,17 @@ public class LivreController {
         this.livreService = livreService;
     }
 
-    public void add(){
-        Livre livre =new Livre();
-        Auteur auteur = new Auteur();
-
-        System.out.println("Enter Title : ");
-        livre.setTitre(scanner.nextLine());
-        System.out.println("Enter ISBN : ");
-        livre.setIsbn(scanner.nextLine());
-        System.out.println("Enter Quantity : ");
-        livre.setQnt(Long.parseLong(scanner.nextLine()));
-        System.out.println("Enter Auteur Id : ");
-        auteur.setId(Integer.parseInt(scanner.nextLine()));
-        livre.setAuteur(auteur);
-
+    public void add(Livre livre){
         livreService.Addlivra(livre);
     }
 
-    public void trouverLivreParId(){
-        System.out.println("enter id : ");
-        int id = Integer.parseInt(scanner.nextLine());
-        livreService.trouverLivreParId(id);
+    public Livre trouverLivreParId(int id){
+        return livreService.trouverLivreParId(id);
     }
-    public void trouverTousLesLivres(){
-        System.out.println(livreService.trouverTousLesLivres());
+    public List<Livre> trouverTousLesLivres(){
+        List<Livre> livres = new ArrayList<>();
+       livres = livreService.trouverTousLesLivres() ;
+        return  livres ;
     }
     public void mettreAJourLivr(){
         Livre livre =new Livre();
@@ -56,5 +46,15 @@ public class LivreController {
         System.out.println("Enter Auteur Id : ");
         auteur.setId(Integer.parseInt(scanner.nextLine()));
         livre.setAuteur(auteur);
+    }
+
+    public List<Livre> livresParTitre(String titre){
+        List<Livre> livres = livreService.livresParTitre(titre);
+        return livres ;
+    }
+    public List<Livre> livresParAuteur(String nom){
+        List<Livre> livres = new ArrayList<>();
+        livres =  livreService.livresParAuteur(nom);
+        return livres;
     }
 }
