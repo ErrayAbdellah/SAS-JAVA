@@ -31,21 +31,8 @@ public class LivreController {
        livres = livreService.trouverTousLesLivres() ;
         return  livres ;
     }
-    public void mettreAJourLivr(){
-        Livre livre =new Livre();
-        Auteur auteur = new Auteur();
-
-        System.out.println("Enter id : ");
-        livre.setTitre(scanner.nextLine());
-        System.out.println("Enter Title : ");
-        livre.setTitre(scanner.nextLine());
-        System.out.println("Enter ISBN : ");
-        livre.setIsbn(scanner.nextLine());
-        System.out.println("Enter Quantity : ");
-        livre.setQnt(Long.parseLong(scanner.nextLine()));
-        System.out.println("Enter Auteur Id : ");
-        auteur.setId(Integer.parseInt(scanner.nextLine()));
-        livre.setAuteur(auteur);
+    public String mettreAJourLivr(Livre livre){
+         return livreService.mettreAJourLivr(livre);
     }
 
     public List<Livre> livresParTitre(String titre){
@@ -56,5 +43,9 @@ public class LivreController {
         List<Livre> livres = new ArrayList<>();
         livres =  livreService.livresParAuteur(nom);
         return livres;
+    }
+
+    public String supprimer(int id){
+        return livreService.supprimer(id);
     }
 }

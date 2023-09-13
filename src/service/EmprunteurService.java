@@ -1,6 +1,7 @@
 package service;
 
 import entity.Emprunteur;
+import entity.Livre;
 import repository.IEmprunteurRepo;
 import repository.ILivreEmprunteurRepo;
 import repository.ILivreRepo;
@@ -18,7 +19,9 @@ public class EmprunteurService {
 
     public void ajouterEmprunte(Emprunteur emprunteur) throws Exception{
         ILivreEmprunteurRepo livreEmprunteurRepo = new LivreEmprunteurImpl();
-        if (livreRepo.checkQnt(emprunteur.getLivre().getId()) <= 0 && livreRepo.findById(emprunteur.getLivre().getId())==null ){
+        Livre livre = new Livre();
+        livre = livreRepo.findById(emprunteur.getLivre().getId()) ;
+        if (livreRepo.checkQnt(emprunteur.getLivre().getId()) <= 0 || livre ==null ){
             System.out.println("Il n'y a pas de livres");
             return;
         }

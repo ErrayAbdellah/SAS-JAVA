@@ -3,6 +3,7 @@ package service;
 import entity.Livre;
 import repository.ILivreRepo;
 
+import javax.swing.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +35,6 @@ public class LivreService {
             return livre ;
         }
     }
-
     public List<Livre> trouverTousLesLivres(){
         List<Livre> livres = new ArrayList<>();
         livres = repo.findAll();
@@ -44,18 +44,18 @@ public class LivreService {
             return livres ;
         }
     }
-    public void mettreAJourLivr(Livre livre){
+    public String mettreAJourLivr(Livre livre){
         if (livre.getIsbn() == null || livre.getIsbn().isEmpty()) {
-            System.out.println("ISBN ne peut pas être vide");
-            return;
+
+            return "ISBN ne peut pas être vide";
         }
         if (livre.getQnt() <= 0) {
-            System.out.println("La quantité (Qnt) doit être supérieure à zéro");
-            return;
+            return "La quantité (Qnt) doit être supérieure à zéro";
         }
-        repo.update(livre);
-    }
 
+        repo.update(livre);
+        return "succès, le livre est modifie";
+    }
     public List<Livre> livresParTitre(String titre){
         List<Livre> livres = new ArrayList<>();
         livres = repo.searchByTitre(titre);
@@ -65,5 +65,13 @@ public class LivreService {
         List<Livre> livres = new ArrayList<>();
         livres =  repo.searchByََAuteur(nom);
         return livres;
+    }
+    public String supprimer(int id){
+
+        if (repo.findById(id)==null){
+            return "Il n'y a pas de livres";
+        }
+        repo.delete(id);
+        return "succès, le livre est supprimer";
     }
 }
